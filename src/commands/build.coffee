@@ -19,17 +19,26 @@ AugmentSource = (source) ->
 
   TagLineIndex = lines.reverse().findIndex (line) ->
     line.startsWith 'tag'
-  lines[TagLineIndex] = "BareTag = #{lines[TagLineIndex]}"
+  TagLine = lines[TagLineIndex]
+  lines[TagLineIndex] = "BareTag = #{TagLine}"
   lines.reverse()
+
+  if IsTagNamed TagLine
+    TagType = 'named'
+    TagName = TagNameFromLine TagLine
+  else
+    TagType = 'nameless'
+    TagName = TAG.name
 
   if IO.exist "#{SRC}/style.sass"
     CompileStyles()
     lines.push """
       import { css } from './css.js'
       HeadCSS = ->
-        unless document.getElementById '#{TAG.name}'
+        id = '#{TagName}Style'
+        unless document.getElementById id
           { style } = TAGS
-          s = style id: '#{TAG.name}'
+          s = style { id }
           s.textContent = css
           head = document.querySelector 'head'
           head.appendChild s
@@ -40,7 +49,10 @@ AugmentSource = (source) ->
   else
     lines.push "TAG = BareTag"
 
-  lines.push "export { TAG as #{TAG.name} }"
+  if TagType is 'named'
+    lines.push "window.TAGS.#{TagName} = TAG"
+
+  lines.push "export { TAG as #{TagName} }"
   lines.join "\n"
 
 sass = require 'sass'
@@ -52,3 +64,9 @@ CompileStyles = ->
     export { css }
   """
   IO.write "#{LIB}/css.js", output
+
+IsTagNamed = (line) ->
+  (line.startsWith 'tag "') or (line.startsWith "tag '")
+
+TagNameFromLine = (line) ->
+  line[5..].split(/'|"/)[0]
