@@ -1,0 +1,20 @@
+{
+  "name": "maketag",
+  "bin": "./bin/maketag",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "coffee --compile --output lib src",
+    "start": "coffee --watch --compile --output lib src",
+    "test": "jasmine"
+  },
+  "dependencies": {
+    "@ch1c0t/io": "^0.0.3",
+    "@ch1c0t/sh": "^0.0.1",
+    "coffeescript": "^2.6.0",
+    "hyphenate.pascalcase": "^0.0.0",
+    "sass": "^1.42.1"
+  },
+  "devDependencies": {
+    "jasmine": "^3.9.0"
+  }
+}
