@@ -23,7 +23,7 @@ CreateSource = ->
 
     #{TagLine}
       data:
-        name: -> @
+        name: -> @value
       view: ->
         div "Hello, \#{@name}."
   """

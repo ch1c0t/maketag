@@ -5,16 +5,17 @@ exports.CreatePackageFile = ({ name }) ->
   spec =
     name: hyphenated
     type: 'module'
+    main: 'lib/main.js'
     version: '0.0.0'
     scripts:
       build: "maketag build"
       start: "maketag watch"
-      test: "jasmine"
+      test: "maketag test"
     dependencies:
       'web.tags': 'file:../../web.tags'
     devDependencies:
       maketag: "file:.."
-      jasmine: "^3.9.0"
+      serve: "^12.0.1"
 
   type = if (hyphenated.includes '-') then 'named' else 'nameless'
   spec.tag = { name, type }
