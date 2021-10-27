@@ -29,7 +29,7 @@ CreateIndexHTML = (dir) ->
 { build } = require 'esbuild'
 coffee = require 'coffeescript'
 CreateMainJS = (dir) ->
-  ImportStatement = switch TAG.type
+  entry = switch TAG.type
     when 'named'
       """
       import "#{CWD}"
@@ -41,11 +41,6 @@ CreateMainJS = (dir) ->
       window.#{TAG.name} = #{TAG.name}
       """
 
-  entry = """
-    #{ImportStatement}
-    window.ROOT = #{TAG.name}()
-    document.render ROOT
-  """
   await IO.write "#{dir}/entry.js", (coffee.compile entry)
 
   build
