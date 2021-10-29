@@ -10,7 +10,7 @@ CompileStyles = ->
   """
   IO.write "#{LIB}/css.js", output
 
-exports.AugmentStyle = (lines) ->
+exports.AddStyle = (lines) ->
   CompileStyles()
   lines.push """
     import { css } from './css.js'

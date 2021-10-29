@@ -30,10 +30,11 @@ CreateSource = ->
 
   await IO.write "#{DIR}/src/script.coffee", source
 
+{ hyphenate } = require 'hyphenate.pascalcase'
 CreateStyle = ->
   if TAG.type is 'named'
     await IO.write "#{DIR}/src/style.sass", """
-      #{TAG.name}
+      #{hyphenate TAG.name}
         background-color: black
     """
 

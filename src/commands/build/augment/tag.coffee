@@ -1,15 +1,29 @@
-{ UpdateTAG } = require './tag/package'
+coffee = require 'coffeescript'
+{ UpdateGlobalTAG } = require './tag/global'
+{ UpdatePackage } = require './tag/package'
 
-exports.AugmentTag = (lines) ->
-  line = UpdateFirstLineOfLastExpression lines
-  UpdateTAG line
+exports.UpdateTAG = (source) ->
+  { body } = coffee
+    .compile source, ast: yes
+    .program
 
-UpdateFirstLineOfLastExpression = (lines) ->
-  TagLineIndex = lines.reverse().findIndex (line) ->
-    not line.startsWith ' '
-  TagLine = lines[TagLineIndex]
+  last = body[body.length-1]
 
-  lines[TagLineIndex] = "BareTag = #{TagLine}"
-  lines.reverse()
+  if last.type isnt 'ExpressionStatement'
+    console.error """
+      #{SRC}/script.coffee must end with an ExpressionStatement.
+    """
 
-  TagLine
+  { expression } = last
+  index = switch expression.type
+    when 'CallExpression', 'FunctionExpression'
+      last.loc.start.line - 1
+    else
+      console.error """
+        #{SRC}/script.coffee must end with either a CallExpression or a FunctionExpression.
+      """
+
+  UpdateGlobalTAG expression
+  UpdatePackage()
+
+  index
