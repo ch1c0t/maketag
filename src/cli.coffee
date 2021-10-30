@@ -13,7 +13,9 @@ exports.run = ->
   [_node, _program, command] = process.argv
 
   if command in ['watch', 'build', 'test']
-    global.TAG = (require "#{CWD}/package.json").tag
+    { Tag } = require './tag'
+    { tag } = require "#{CWD}/package.json"
+    global.TAG = Tag tag
 
   switch command
     when 'new'

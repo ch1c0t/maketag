@@ -1,6 +1,5 @@
 coffee = require 'coffeescript'
 { UpdateGlobalTAG } = require './tag/global'
-{ UpdatePackage } = require './tag/package'
 
 exports.UpdateTAG = (source) ->
   { body } = coffee
@@ -24,6 +23,4 @@ exports.UpdateTAG = (source) ->
       """
 
   UpdateGlobalTAG expression
-  UpdatePackage()
-
   index
