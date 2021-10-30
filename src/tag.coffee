@@ -6,10 +6,11 @@ exports.Tag = (tag) ->
         target[key] = value
         UpdatePackage target
   
+fs = require 'fs'
 UpdatePackage = (tag) ->
   spec = require "#{CWD}/package.json"
   spec.tag = tag
 
   console.log "Updating the tag field in package.json."
   json = JSON.stringify spec, null, 2
-  IO.write "#{CWD}/package.json", json
+  fs.writeFileSync "#{CWD}/package.json", json
