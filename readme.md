@@ -50,7 +50,7 @@ element = SomeTag() # first invocation
 element2 = SomeTag() # second invocation
 ```
 
-, it adds its style to [the head][head] as
+, a tag adds its style to [the head][head] as
 
 ```
 <style id="SomeTagStyle">css from src/style.sass</style>
@@ -58,7 +58,7 @@ element2 = SomeTag() # second invocation
 
 .
 
-It adds [a style tag][style] with [an id attribute][id],
+It adds [a style element][style] with [an id attribute][id],
 whose value is obtained from appending "Style" to the NAME.
 
 [head]: https://developer.mozilla.org/en-US/docs/Glossary/Head
