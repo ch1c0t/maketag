@@ -1,7 +1,7 @@
 {
   "name": "maketag",
   "bin": "./bin/maketag",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "build": "coffee --compile --output lib src",
     "start": "coffee --watch --compile --output lib src",
@@ -22,5 +22,12 @@
     "sass": "^1.42.1",
     "serve": "^12.0.1",
     "value.as": "^0.0.0"
+  },
+  "author": "Anatoly Chernov <chertoly@gmail.com>",
+  "description": "A tool to make web tags",
+  "license": "0BSD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ch1c0t/maketag"
   }
 }
