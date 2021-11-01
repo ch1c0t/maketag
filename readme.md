@@ -1,6 +1,6 @@
 # Introduction
 
-`maketag` is a tool to make [web.tags][web.tags].
+`maketag` is a tool to make [web tags][web.tags].
 
 [web.tags]: https://github.com/ch1c0t/web.tags
 
@@ -59,7 +59,7 @@ element2 = SomeTag() # second invocation
 .
 
 It adds [a style element][style] with [an id attribute][id],
-whose value is obtained from appending "Style" to the NAME.
+whose value is obtained by appending "Style" to the NAME.
 
 [head]: https://developer.mozilla.org/en-US/docs/Glossary/Head
 [style]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style
