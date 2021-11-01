@@ -12,9 +12,9 @@ exports.CreatePackageFile = ({ name }) ->
       start: "maketag watch"
       test: "maketag test"
     dependencies:
-      'web.tags': 'file:../../web.tags'
+      'web.tags': '^0.0.1'
     devDependencies:
-      maketag: "file:.."
+      maketag: "^0.0.2"
       serve: "^12.0.1"
 
   type = if (hyphenated.includes '-') then 'named' else 'nameless'
