@@ -35,7 +35,7 @@ CreateMainJS = (dir) ->
       import "#{CWD}"
       window.#{TAG.name} = TAGS.#{TAG.name}
       """
-    when 'nameless'
+    when 'nameless', 'wrapped'
       """
       import { #{TAG.name} } from "#{CWD}"
       window.#{TAG.name} = #{TAG.name}
