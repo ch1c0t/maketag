@@ -25,7 +25,7 @@ and start working on a tag.
 
 ## Entry points
 
-There are two entry points to a tag:
+There are three entry points to a tag:
 
 ### Script
 
@@ -64,6 +64,11 @@ whose value is obtained by appending "Style" to the NAME.
 [head]: https://developer.mozilla.org/en-US/docs/Glossary/Head
 [style]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style
 [id]: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
+
+### `package.json`
+
+contains the field `tag` with the tag's NAME and metadata.
+This field is used to build the tag.
 
 ## Commands
 

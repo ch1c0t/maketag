@@ -1,7 +1,7 @@
 {
   "name": "maketag",
   "bin": "./bin/maketag",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "build": "coffee --compile --output lib src",
     "start": "coffee --watch --compile --output lib src",
