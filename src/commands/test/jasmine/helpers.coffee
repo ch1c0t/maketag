@@ -17,9 +17,13 @@ global.SetupPage = ({ root }) ->
     await @page.reload()
 
     if root?
-      handle = await @page.evaluateHandle root
-      await handle.evaluate (root) ->
+      @handle = await @page.evaluateHandle root
+      await @handle.evaluate (root) ->
         window.ROOT = root
+
+      @root = new Proxy @handle,
+        get: (target, key) ->
+          target.evaluate "ROOT.#{key}"
 
     await @page.evaluate ->
       document.body.render ROOT
