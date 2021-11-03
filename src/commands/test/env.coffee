@@ -14,7 +14,8 @@ Env = fun
   once: ->
     port = await @server 'port'
     @page = await @browser 'page'
-    await @page.goto "http://localhost:#{port}"
+    @url = "http://localhost:#{port}"
+    await @page.goto @url
   call: (input) ->
     try
       await @once
@@ -22,6 +23,10 @@ Env = fun
       switch input
         when 'page'
           @page
+        when 'NewPage'
+          page = await @browser 'NewPage'
+          await page.goto @url
+          page
     catch error
       console.log error
 

@@ -11,13 +11,14 @@ CreateENV = ->
 promise = CreateENV()
 
 global.SetupPage = ({ root, device }) ->
-  beforeEach ->
+  beforeAll ->
     await promise
-    @page = await ENV 'page'
+    @page = await ENV 'NewPage'
     if device?
       puppeteer = require 'puppeteer'
       await @page.emulate puppeteer.devices[device]
 
+  beforeEach ->
     await @page.reload()
 
     if root?
