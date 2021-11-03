@@ -7,8 +7,9 @@ CreateJasmineSetup = ({ name, directory }) ->
 CreateSomeSpec = ({ name, directory }) ->
   source = """
     describe '#{TAG.name}', ->
-      SetupPage ->
-        window.ROOT = #{TAG.name} name: 'Ruby'
+      SetupPage
+        root: ->
+          #{TAG.name} name: 'Ruby'
 
       it 'works', ->
         html = await @page.evaluate -> ROOT.innerHTML

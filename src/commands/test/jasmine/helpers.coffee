@@ -10,11 +10,16 @@ CreateENV = ->
 
 promise = CreateENV()
 
-global.SetupPage = (fn) ->
+global.SetupPage = ({ root }) ->
   beforeEach ->
     await promise
     @page = await ENV 'page'
     await @page.reload()
-    await @page.evaluate fn
+
+    if root?
+      handle = await @page.evaluateHandle root
+      await handle.evaluate (root) ->
+        window.ROOT = root
+
     await @page.evaluate ->
       document.body.render ROOT
