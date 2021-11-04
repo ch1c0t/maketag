@@ -1,13 +1,14 @@
 chokidar = require 'chokidar'
 
-{ build } = require './build'
+{ build, BuildMain, BuildRest } = require './build'
 { CreateAssets } = require './test/assets'
 
 exports.watch = ->
   await build()
   await CreateAssets()
 
-  watching ["#{SRC}/**/*.coffee", "#{SRC}/**/*.sass"], build
+  watching ["#{SRC}/script.coffee", "#{SRC}/**/*.sass"], BuildMain
+  watching ["#{SRC}/**/*.coffee"], BuildRest
   watching ["#{LIB}/**"], CreateAssets
 
 watching = (array, fn) ->
