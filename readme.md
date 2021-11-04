@@ -79,8 +79,6 @@ you can use the following commands:
 
 `maketag test`(or `npm test`) to run the tests.
 
-`maketag new NAME` generates a tag and a basic test of it with Jasmine and Puppeteer.
-
 ### `build`
 
 `maketag build`(or `npm run build`) to build the project.
@@ -89,3 +87,7 @@ you can use the following commands:
 
 `maketag watch`(or `npm start`) to start a development session.
 It builds the project, and then rebuilds the project when the sources change.
+
+## Testing
+
+`maketag new NAME` generates a tag and a basic test of it with Jasmine and Puppeteer.
