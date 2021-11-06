@@ -10,7 +10,7 @@ CreateENV = ->
 
 promise = CreateENV()
 
-global.SetupPage = ({ root, device }) ->
+global.SetupPage = ({ device, root, script }) ->
   beforeAll ->
     await promise
     @page = await ENV 'NewPage'
@@ -30,5 +30,8 @@ global.SetupPage = ({ root, device }) ->
         get: (target, key) ->
           target.evaluate "ROOT.#{key}"
 
-    await @page.evaluate ->
-      document.body.render ROOT
+    if script?
+      await @page.evaluate script
+    else
+      await @page.evaluate ->
+        document.body.render ROOT
