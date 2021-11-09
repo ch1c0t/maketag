@@ -3,8 +3,7 @@
   "bin": "./bin/maketag",
   "version": "0.0.9",
   "scripts": {
-    "build": "coffee --compile --output lib src",
-    "start": "coffee --watch --compile --output lib src",
+    "start": "coffee scripts/start.coffee",
     "test": "jasmine"
   },
   "dependencies": {
