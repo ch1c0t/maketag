@@ -1,10 +1,10 @@
 require 'coffeescript/register'
 
-{ CreateAssets } = require '../assets'
+{ CreateAssetsForAutomatedTesting } = require '../assets'
 { Env } = require '../env'
 
 CreateENV = ->
-  path = await CreateAssets()
+  path = await CreateAssetsForAutomatedTesting()
   global.ENV = Env
     server: { path }
 
