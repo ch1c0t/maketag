@@ -1,15 +1,8 @@
 { createServer } = require 'http'
 
-Respond = ({ root, response, url, ContentType }) ->
-  IO
-    .read "#{root}#{url}"
-    .then (content) ->
-      response.writeHead 200, 'Content-Type': ContentType
-      response.end content
-    .catch (error) ->
-      console.error error
-      response.writeHead 500
-      response.end "Error: #{error}"
+{ RespondWithFile } = require './server/respond_with_file'
+{ PreparePageList } = require './server/pagelist'
+{ PreparePage } = require './server/page'
 
 exports.StartServer = ({ path }) ->
   root = '/tmp/maketag/assets.manual'
@@ -19,22 +12,42 @@ exports.StartServer = ({ path }) ->
 
     switch request.url
       when '/', '/index.html'
-        Respond {
+        RespondWithFile {
           root
           response
           url: '/index.html'
           ContentType: 'text/html'
         }
-      when '/main.js', '/coffeescript.js'
-        Respond {
+      when '/main.js'
+        RespondWithFile {
           root
           response
           url: request.url
           ContentType: 'text/javascript'
         }
+      when '/page-list.js'
+        PreparePageList().then (content) ->
+          response.writeHead 200, 'Content-Type': 'text/javascript'
+          response.end content
       else
-        response.writeHead 404
-        response.end "Error: 404."
+        glob = require 'glob'
+        { basename } = require 'path'
+        glob "#{CWD}/spec/*.spec.coffee", nodir: yes, (error, files) ->
+          names = for file in files
+            basename file, '.spec.coffee'
+
+          if request.url[1..] in names
+            PreparePage(request.url)
+              .then (content) ->
+                response.writeHead 200, 'Content-Type': 'text/html'
+                response.end content
+              .catch (error) ->
+                console.error error
+                response.writeHead 500
+                response.end "Error: #{error}"
+          else
+            response.writeHead 404
+            response.end "Error: 404."
 
 
   server.listen 8081, ->

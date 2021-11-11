@@ -16,10 +16,8 @@ exports.CreateAssetsForManualTesting = ->
           </head>
           <body>
             <script src="/main.js"></script>
-            <script src="/coffeescript.js"></script>
+            <script src="/page-list.js"></script>
           </body
         </html>
       """
       IO.write "#{dir}/index.html", html
-
-  IO.copy "#{__dirname}/assets/coffeescript.js", "#{dir}/coffeescript.js"
