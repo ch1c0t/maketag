@@ -1,3 +1,4 @@
+os = require 'os'
 { createServer } = require 'http'
 
 { RespondWithFile } = require './server/respond_with_file'
@@ -8,8 +9,6 @@ exports.StartServer = ({ path }) ->
   root = '/tmp/maketag/assets.manual'
 
   server = createServer (request, response) ->
-    console.log request.url
-
     switch request.url
       when '/', '/index.html'
         RespondWithFile {
@@ -49,8 +48,12 @@ exports.StartServer = ({ path }) ->
             response.writeHead 404
             response.end "Error: 404."
 
-
   server.listen 8081, ->
+    urls = for _name, value of os.networkInterfaces()
+      "  http://#{value[0].address}:8081"
+
     console.log """
-      The server for manual testing is listening at the port 8081.
+      The server for manual testing is listening at:
+
+      #{urls.join "\n"}
     """
