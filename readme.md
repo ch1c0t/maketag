@@ -88,6 +88,8 @@ you can use the following commands:
 `maketag watch`(or `npm start`) to start a development session.
 It builds the project, and then rebuilds the project when the sources change.
 
+It also starts a server for manual testing(and outputs urls where it is listening).
+
 ## Testing
 
 `maketag new NAME` generates a tag and a basic test of it with Jasmine and Puppeteer.
